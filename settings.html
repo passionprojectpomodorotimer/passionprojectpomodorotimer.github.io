@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Settings Page</title>
+<style>
+    /* CSS styles for your settings page */
+   .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            z-index: 1000;
+        }
+
+        .back-btn:hover {
+            background-color: #0056b3;
+            transform: scale(1.1);
+        }
+
+        .back-btn:active {
+            transform: scale(0.95);
+        }
+ 
+   
+   
+   
+   
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f4f4f4;
+    }
+    .container {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+        color: #333;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    .setting-item {
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .setting-item label {
+        font-weight: bold;
+        color: #555;
+        flex-grow: 1;
+        margin-right: 15px;
+    }
+    .setting-item input[type="checkbox"] {
+        transform: scale(1.2);
+    }
+    .setting-item input[type="text"], .setting-item select {
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        width: 150px; /* Adjust as needed */
+    }
+    button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 30px;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-btn">
+<h3>←</h3>
+    </a>
+
+<div class="container">
+    <h1>User Settings</h1>
+    <div class="setting-item">
+        <label for="language">Ringtone:</label>
+        <select id="language">
+            <option value="en">School Bell</option>
+            <option value="es">Chicken</option>
+            <option value="fr">Bell</option>
+        </select>
+    </div>
+    <div class="setting-item">
+        <label for="username">Username:</label>
+        <input type="text" id="username" value="User">
+    </div>
+    <button id="saveSettings">Save Settings</button>
+</div>
+<script>
+    // JavaScript for handling settings logic
+    document.addEventListener('DOMContentLoaded', () => {
+        const languageSelect = document.getElementById('language');
+        const usernameInput = document.getElementById('username');
+        const saveButton = document.getElementById('saveSettings');
+
+        // Load saved settings (if any)
+        const savedSettings = JSON.parse(localStorage.getItem('userSettings')) || {};
+        languageSelect.value = savedSettings.language || 'en';
+        usernameInput.value = savedSettings.username || 'User';
+
+        // Event listeners for changes
+        saveButton.addEventListener('click', () => {
+            const currentSettings = {
+                language: languageSelect.value,
+                username: usernameInput.value
+            };
+            localStorage.setItem('userSettings', JSON.stringify(currentSettings));
+            alert('Settings saved!');
+        });
+    });
+</script>
+</body>
+</html>
